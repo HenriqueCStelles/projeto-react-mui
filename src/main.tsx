@@ -5,6 +5,8 @@ import "./index.css";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import EditProductPage from "./pages/EditProductPage.tsx";
+import Register from "./pages/Register.tsx";
+import Login from "./pages/Login.tsx";
 
 const theme = createTheme({
   palette: {
@@ -34,6 +36,14 @@ const theme = createTheme({
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/app",
     element: <App />,
   },
   {

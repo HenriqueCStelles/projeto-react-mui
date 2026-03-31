@@ -1,7 +1,10 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import NewProduct from "./components/NewProduct";
 import { useEffect, useState } from "react";
 import Products from "./components/Products";
+import { auth } from "./components/firebase";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 export type Produto = { id: number; nome: string; quantidade: number };
 
@@ -28,15 +31,24 @@ function App() {
     setProduto(newProducts);
   }
 
+  const handleLogout = async () => {
+    await signOut(auth);
+    navigate("/");
+  };
+
+  const navigate = useNavigate();
+
   return (
     <Container sx={{ display: "flex", justifyContent: "center" }}>
       <Box>
-        <Typography
-          variant="h1"
-          sx={{ my: 4, textAlign: "center", color: "primary.main" }}
+        <Box
+          sx={{ justifyContent: "center", color: "#013e87", display: "flex" }}
         >
-          Gerenciador de Estoque
-        </Typography>
+          <Box>
+            <Typography variant="h1">Gerenciador de Estoque</Typography>
+          </Box>
+          <Button onClick={handleLogout}>Sair</Button>
+        </Box>
         <NewProduct addProduct={addProduct} />
         <Products produtos={produtos} deleteProduct={deleteProduct} />
       </Box>
